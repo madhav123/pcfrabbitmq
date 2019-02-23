@@ -1,0 +1,13 @@
+---
+applications:
+- name: pfcrabbitmqex
+  path: target\pfcrabbitmqex-0.0.1-SNAPSHOT.jar
+  memory: 768M
+  instances: 1
+  random-route: true
+  services:
+  - config-server
+  - Redis
+  - Rabbitmq
+  buildpacks:
+  - https://github.com/cloudfoundry/java-buildpack.git
