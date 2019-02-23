@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@ConfigurationProperties
+
 public class MessageRestController {
 	
 	@Autowired
@@ -22,35 +22,6 @@ public class MessageRestController {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
-		@Value("${hyd}") 	
-		 String locaiton;
-		@RequestMapping("/hello")
-		String getMessage(@RequestParam(value = "name") String name) {
-			String rsp = "Hi " + name + " : responded on - " + new Date();
-			System.out.println(rsp);
-			return rsp;
-		}
-		
-		@RequestMapping("/getlocation")
-		String getMessage() {
-			
-			return locaiton;
-		}
-		
-		@RequestMapping("/putdatatocache")
-		String putcache() {
-			redisTemplate.opsForValue().set("student", "madhav");
-			
-			
-			return "Madhav" + redisTemplate.getClientList();
-		}
-		
-		@RequestMapping("/getcachedata")
-		String getMessage1() {
-		
-		
-			return "Madhav-test" +redisTemplate.opsForValue().get("student");
-		}
 		@RequestMapping("/putdatatomq")
 		String putmessageinQueue() {
 			rabbitTemplate.convertAndSend("Test", "Sample Test");
